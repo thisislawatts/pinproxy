@@ -1,4 +1,4 @@
-package goproxy_test
+package pinproxy_test
 
 import (
 	"bufio"
@@ -22,8 +22,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/elazarl/goproxy"
-	goproxy_image "github.com/elazarl/goproxy/ext/image"
+	goproxy "github.com/thisislawatts/pinproxy"
+	goproxy_image "github.com/thisislawatts/pinproxy/ext/image"
 )
 
 var acceptAllCerts = &tls.Config{InsecureSkipVerify: true}

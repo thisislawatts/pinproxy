@@ -1,4 +1,4 @@
-package goproxy
+package pinproxy
 
 import (
 	"crypto/aes"

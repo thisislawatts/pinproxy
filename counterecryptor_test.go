@@ -1,4 +1,4 @@
-package goproxy_test
+package pinproxy
 
 import (
 	"bytes"
@@ -8,8 +8,6 @@ import (
 	"math"
 	"math/rand"
 	"testing"
-
-	"github.com/elazarl/goproxy"
 )
 
 type RandSeedReader struct {
@@ -26,7 +24,7 @@ func (r *RandSeedReader) Read(b []byte) (n int, err error) {
 func TestCounterEncDifferentConsecutive(t *testing.T) {
 	k, err := rsa.GenerateKey(&RandSeedReader{*rand.New(rand.NewSource(0xFF43109))}, 128)
 	fatalOnErr(err, "rsa.GenerateKey", t)
-	c, err := goproxy.NewCounterEncryptorRandFromKey(k, []byte("the quick brown fox run over the lazy dog"))
+	c, err := pinproxy.NewCounterEncryptorRandFromKey(k, []byte("the quick brown fox run over the lazy dog"))
 	fatalOnErr(err, "NewCounterEncryptorRandFromKey", t)
 	for i := 0; i < 100*1000; i++ {
 		var a, b int64
@@ -41,9 +39,9 @@ func TestCounterEncDifferentConsecutive(t *testing.T) {
 func TestCounterEncIdenticalStreams(t *testing.T) {
 	k, err := rsa.GenerateKey(&RandSeedReader{*rand.New(rand.NewSource(0xFF43109))}, 128)
 	fatalOnErr(err, "rsa.GenerateKey", t)
-	c1, err := goproxy.NewCounterEncryptorRandFromKey(k, []byte("the quick brown fox run over the lazy dog"))
+	c1, err := pinproxy.NewCounterEncryptorRandFromKey(k, []byte("the quick brown fox run over the lazy dog"))
 	fatalOnErr(err, "NewCounterEncryptorRandFromKey", t)
-	c2, err := goproxy.NewCounterEncryptorRandFromKey(k, []byte("the quick brown fox run over the lazy dog"))
+	c2, err := pinproxy.NewCounterEncryptorRandFromKey(k, []byte("the quick brown fox run over the lazy dog"))
 	fatalOnErr(err, "NewCounterEncryptorRandFromKey", t)
 	nout := 1000
 	out1, out2 := make([]byte, nout), make([]byte, nout)
@@ -78,7 +76,7 @@ func stddev(data []int) float64 {
 func TestCounterEncStreamHistogram(t *testing.T) {
 	k, err := rsa.GenerateKey(&RandSeedReader{*rand.New(rand.NewSource(0xFF43109))}, 128)
 	fatalOnErr(err, "rsa.GenerateKey", t)
-	c, err := goproxy.NewCounterEncryptorRandFromKey(k, []byte("the quick brown fox run over the lazy dog"))
+	c, err := pinproxy.NewCounterEncryptorRandFromKey(k, []byte("the quick brown fox run over the lazy dog"))
 	fatalOnErr(err, "NewCounterEncryptorRandFromKey", t)
 	nout := 100 * 1000
 	out := make([]byte, nout)

@@ -1,6 +1,6 @@
 // Taken from $GOROOT/src/pkg/net/http/chunked
 // needed to write https responses to client.
-package goproxy
+package pinproxy
 
 import (
 	"io"

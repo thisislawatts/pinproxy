@@ -1,15 +1,16 @@
-package goproxy_image
+package pinproxy_image
 
 import (
 	"bytes"
-	. "github.com/elazarl/goproxy"
-	"github.com/elazarl/goproxy/regretable"
 	"image"
 	_ "image/gif"
 	"image/jpeg"
 	"image/png"
 	"io/ioutil"
 	"net/http"
+
+	. "github.com/thisislawatts/pinproxy"
+	"github.com/thisislawatts/pinproxy/regretable"
 )
 
 var RespIsImage = ContentTypeIs("image/gif",
